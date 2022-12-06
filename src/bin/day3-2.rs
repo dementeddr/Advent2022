@@ -5,7 +5,7 @@ use std::collections::HashSet;
 
 fn main() {
 
-    let input_path = "../input.txt";
+    let input_path = "../input/day3-input.txt";
     let input = fs::read_to_string(input_path).expect("Could't read input file");
     let input: str::Split<&str> = input.split("\n");
     let mut bags = Vec::new();

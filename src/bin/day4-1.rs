@@ -4,7 +4,7 @@ use regex::Regex;
 
 fn main() {
 
-    let input_path = "../input.txt";
+    let input_path = "../input/day4-input.txt";
     let input = fs::read_to_string(input_path).expect("Could't read input file");
     let input: str::Split<&str> = input.split("\n");
     let re = Regex::new(r"(\d*)-(\d*),(\d*)-(\d*)").unwrap();
@@ -26,13 +26,10 @@ fn main() {
         r2[0] = nums.get(3).unwrap().as_str().parse().expect("parse problem");
         r2[1] = nums.get(4).unwrap().as_str().parse().expect("parse problem");
 
-        if (r1[0] <= r2[0] && r1[1] >= r2[0]) ||
-            (r1[0] <= r2[1] && r1[1] >= r2[1]) ||
-            (r1[0] > r2[0] && r1[1] < r2[1]) {
+        if (r1[0] <= r2[0] && r1[1] >= r2[1]) ||
+            (r1[0] >= r2[0] && r1[1] <= r2[1]) {
             count += 1;
-            println!("overlap: {}-{},{}-{} count={}", r1[0], r1[1], r2[0], r2[1], count);
-        } else {
-            println!("noverlap: {}-{},{}-{}", r1[0], r1[1], r2[0], r2[1]);
+            println!("super-range: {}-{},{}-{} count={}", r1[0], r1[1], r2[0], r2[1], count);
         }
     }
 

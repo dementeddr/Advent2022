@@ -5,13 +5,12 @@ use std::collections::HashMap;
 
 fn main() {
 
-    let input_path = "../input.txt";
+    let input_path = "../input/day5-input.txt";
     let input = fs::read_to_string(input_path).expect("Could't read input file");
     let input: str::Split<&str> = input.split("\n");
 
     let re = Regex::new(r"^move (\d*) from (\d*) to (\d*)$").unwrap();
 
-    // This should have been a vector
     let mut stacks: HashMap<i32, Vec<char>> = HashMap::new();
     let mut stack_input: Vec<&str> = Vec::new();
     let mut found = false;
@@ -85,18 +84,11 @@ fn execute_move(source: i32, target: i32, number: i32, stacks: &mut HashMap<i32,
 
     println!("{source} -> {target} x {number}");
 
-    let mut crane = Vec::new();
-
     for _ in 0..number {
         let mut load = '\0';
         stacks.entry(source).and_modify(|s| {load = s.pop().unwrap();});
-        crane.push(load);
+        stacks.entry(target).and_modify(|s| s.push(load));
     }
-    stacks.entry(target).and_modify(|stack| {
-        while crane.len() > 0 {
-            stack.push(crane.pop().unwrap());
-        }
-    });
 }
 
 

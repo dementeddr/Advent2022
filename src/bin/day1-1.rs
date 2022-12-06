@@ -3,7 +3,7 @@ use std::fs;
 use std::str;
 
 fn main () {
-    let path = "../input.txt";
+    let path = "../input/day1-input.txt";
 
     let input = fs::read_to_string(path).expect("Couldn't read file");
 
