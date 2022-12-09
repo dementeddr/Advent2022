@@ -84,17 +84,24 @@ fn main() {
 
     println!();
 
-    let mut total = 0;
+    let used_space = fs[&String::from("//")];
+    let free_space = 70000000 - used_space;
+    let target = 30000000 - free_space;
 
-    for (dir, size) in fs.iter() {
+    println!("Current Space: {used_space}");
+    println!("Free Space: {free_space}");
+    println!("Deletion Target: {target}\n");
 
-        if *size <= 100000 {
-            total += *size;
-            println!("{dir}={size} total={total}");
+    let mut smallest = 70000000;
+
+    for size in fs.values() {
+        if size > &target && size < &smallest {
+            println!("{smallest} -> {size}");
+            smallest = *size;
         }
     }
 
-    println!("\nFinal Total : {total}");
+    println!("\nDeletion Target Size: {smallest}");
 }
 
 
